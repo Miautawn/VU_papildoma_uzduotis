@@ -11,7 +11,7 @@ According to legend, Grand Duke Gediminas (c. 1275–1341) was hunting in the sa
 
 "What is destined for the ruler and the State of Lithuania, is thus: the Iron Wolf represents a castle and a city which will be established by you on this site. This city will be the capital of the Lithuanian lands and the dwelling of their rulers, and the glory of their deeds shall echo throughout the world."
 ```
-Tai yra vikipedijos straipnio apie Vilnių išrauka.
+Tai yra vikipedijos straipnio apie Vilnių ištrauka.
 
 ### word_table failas (santrauka)
 ```
