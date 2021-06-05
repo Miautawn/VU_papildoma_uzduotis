@@ -1,8 +1,12 @@
 #include "main.hpp"
 
+// regex expression for cleaning
 const regex word_exp("[.%,?!/;:\"'()\\]\\[*0-9]");
+
+// regex expression for URL matching
 const regex url_exp("(((http|https)://)?www\\.)?[a-zA-Z0-9_]+\\.[a-zA-Z0-9_]+\\/?[a-zA-Z0-9_]*");
 
+// class for information about words
 class WordInfo
 {
     public:
@@ -12,19 +16,20 @@ class WordInfo
     WordInfo(int line_number) : count{1}, present_in_line{line_number} {}
 };
 
-
+// cleans the word
 string extract_word(string raw_word) {
 
     //modified_word
     return regex_replace(raw_word, word_exp, "");
 }
 
+// checks weather the word is an URL
 bool is_url(string word) {
     if(regex_match(word, url_exp)) return true;
     else return false;
 }
 
-
+// adds a word to the MAP or just increments if it's already there
 void add_word(string word, map<string, WordInfo> &words, int line_number) {
 
     if(!word.empty()) {
@@ -43,9 +48,9 @@ void add_word(string word, map<string, WordInfo> &words, int line_number) {
     }
 }
 
+// outputs the word frequency table
 void print_word_table(map<string, WordInfo> &words) {
 
-    // word-table
     ofstream output("word_table.txt");
     output<<setw(18)<<left<<"word"<<right<<"count"<<endl;
     output<<string(22, '-')<<endl;
@@ -58,6 +63,7 @@ void print_word_table(map<string, WordInfo> &words) {
 
 }
 
+// calculates the distance for numebrs in cross-reference table
 int calculate_distance(int previous, int current, int diff) {
 
     int previous_count = to_string(previous).length();
@@ -75,7 +81,7 @@ int calculate_distance(int previous, int current, int diff) {
             sum += (current == base) ? i+1 : i+2;
             current = base - 1;
         }
-        //first, let's find the closest 10 base number of the higher number
+
         return sum + calculate_distance(previous, current, (current - previous));
     }
 
@@ -83,15 +89,16 @@ int calculate_distance(int previous, int current, int diff) {
 
 }
 
+// outputs the cross-reference table table
 void print_reference_table(map<string, WordInfo> &words, int line_number) {
 
-    // cross-reference table
     ofstream output("cross_reference_table.txt");
     output<<setw(18)<<left<<"word";
     for(int i = 0; i<line_number; i++) output<<i+1<<" ";
     output<<endl;
     for(auto word : words) {
         if(word.second.count > 1) {
+
             output<<setw(17)<<left<<word.first;
             for(int i = 0; i<word.second.present_in_line.size(); i++) {
                 int previous = (i == 0) ? 0 :  word.second.present_in_line[i-1];
@@ -103,6 +110,7 @@ void print_reference_table(map<string, WordInfo> &words, int line_number) {
     } output.close();
 }
 
+// outputs the URL file
 void print_urls(vector<string> &urls) {
     ofstream output("urls.txt");
     for(auto url : urls) output<<url<<endl;
@@ -137,6 +145,8 @@ int main() {
         } 
         input.close();
         line_number--;
+
+        //final output
         print_word_table(words);
         print_reference_table(words, line_number);
         print_urls(urls);
