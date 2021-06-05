@@ -25,6 +25,7 @@ Although            2
 April               2
 Army                12
 ```
+Šiame faile yra pateikti visi žodžiai, kurie pasikartoja daugiau nei 1 kartą ir pateiktas jų skaičius.
 
 ### cross_reference_table failas (santaruka)
 ```
@@ -37,6 +38,7 @@ Although                                                                        
 April                                                                                                                                *                                                                                                                             *
 Army                                                                                                                                       *                                   *        *     *                                   *  *           *                 *
 ```
+Šiame faile pateikiami visi žodžiai, kurie pasikartojo daugiau nei 1 kartą, ir parodoma, kuriose eilutėse jie buvo.
 
 ### url failas
 ```
